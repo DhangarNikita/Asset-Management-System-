@@ -102,7 +102,7 @@ class AssetServiceImplTest {
         AssetResponseDto result = assetService.createAsset(dto);
         assertNotNull(result);
         assertEquals("ModelY", result.getModelName());
-        assertEquals("Unassigned", dto.getAssignTo());
+        assertEquals("UNASSIGNED", dto.getAssignTo());
     }
 
     @Test

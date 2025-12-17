@@ -7,8 +7,6 @@ import com.asset.AssetManagement.dto.AssetUpdateDto;
 import com.asset.AssetManagement.dto.AssignAssetRequestDto;
 import com.asset.AssetManagement.service.AssetService;
 import com.asset.AssetManagement.util.ValidatorUtil;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -26,7 +24,6 @@ import java.io.FileOutputStream;
 
 @RestController
 @RequestMapping("/asset")
-@Tag(name = "Asset Management", description = "APIs for managing assets")
 public class AssetController {
     public final AssetService assetService;
     private final JobLauncher jobLauncher;
@@ -40,7 +37,6 @@ public class AssetController {
     }
 
     @PostMapping
-    @Operation(summary = "Create a new asset")
     public ResponseEntity<AssetResponseDto> createAsset(@Valid @RequestBody AssetRequestDto dto) {
         ValidatorUtil.serialValid(dto.getSerialName());
         ValidatorUtil.validateDate(dto.getPurchaseDate(), dto.getExpireDate(), dto.getManufactureDate());
@@ -48,19 +44,16 @@ public class AssetController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get asset by ID")
     public ResponseEntity<AssetResponseDto> getAssetById(@PathVariable Long id) {
         return ResponseEntity.ok(assetService.getAsset(id));
     }
 
     @GetMapping
-    @Operation(summary = "Get all assets with pagination")
     public ResponseEntity<Page<AssetResponseDto>> getAll(@RequestParam(defaultValue = Constants.DEFAULT_PAGE) int page, @RequestParam(defaultValue = Constants.DEFAULT_SIZE) int size) {
         return ResponseEntity.ok(assetService.getAllAsset(page, size));
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete asset by ID")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         ValidatorUtil.validateAssetId(id);
         assetService.delete(id);
@@ -68,7 +61,6 @@ public class AssetController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update asset by ID")
     public ResponseEntity<AssetResponseDto> updateAsset(
             @PathVariable Long id,
             @Valid @RequestBody AssetUpdateDto dto) {
@@ -79,7 +71,6 @@ public class AssetController {
     }
 
     @PutMapping("/assign/{assetId}")
-    @Operation(summary = "Assign asset to an employee")
     public ResponseEntity<AssetResponseDto> assignAsset(@PathVariable Long assetId, @Valid @RequestBody AssignAssetRequestDto requestDto) {
         ValidatorUtil.validateAssetId(assetId);
         ValidatorUtil.validateEmployeeId(requestDto.getEmployeeId());
@@ -87,7 +78,6 @@ public class AssetController {
     }
 
     @PostMapping("/upload")
-    @Operation(summary = "Upload CSV file and run batch job to process assets")
     public ResponseEntity<String> uploadCsvAndRunBatch(@RequestParam(Constants.FILE_PARAM) MultipartFile file) throws Exception {
         if (file.isEmpty()) {
             throw new IllegalArgumentException(Constants.FILE_EMPTY);

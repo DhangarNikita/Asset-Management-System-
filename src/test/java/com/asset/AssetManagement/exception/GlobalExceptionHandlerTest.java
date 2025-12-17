@@ -66,7 +66,7 @@ class GlobalExceptionHandlerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         //assertEquals("Something went wrong", response.getBody().getMessage());
         assertEquals("/asset/upload", response.getBody().getPath());
-        assertEquals("INTERNAL_ERROR", response.getBody().getErrorCode());
+        assertEquals("INTERNAL_SERVER_ERROR", response.getBody().getErrorCode());
     }
 
 }
