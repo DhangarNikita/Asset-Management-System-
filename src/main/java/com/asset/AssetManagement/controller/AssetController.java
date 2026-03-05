@@ -8,6 +8,7 @@ import com.asset.AssetManagement.dto.AssignAssetRequestDto;
 import com.asset.AssetManagement.service.AssetService;
 import com.asset.AssetManagement.util.ValidatorUtil;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 
+@Slf4j
 @RestController
 @RequestMapping("/asset")
 public class AssetController {
@@ -45,6 +47,7 @@ public class AssetController {
 
     @GetMapping("/{id}")
     public ResponseEntity<AssetResponseDto> getAssetById(@PathVariable Long id) {
+        log.info("Getting Asset by asset id: " +id);
         return ResponseEntity.ok(assetService.getAsset(id));
     }
 
@@ -57,6 +60,7 @@ public class AssetController {
     public ResponseEntity<String> delete(@PathVariable Long id) {
         ValidatorUtil.validateAssetId(id);
         assetService.delete(id);
+        log.info("Deleted asset with ID: "+ id);
         return ResponseEntity.noContent().build();
     }
 

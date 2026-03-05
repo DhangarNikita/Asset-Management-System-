@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,9 +63,7 @@ class GlobalExceptionHandlerTest {
         Exception ex = new Exception("Something went wrong");
         ResponseEntity<ErrorResponse> response = handler.handleGeneralException(ex, request);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        //assertEquals("Something went wrong", response.getBody().getMessage());
         assertEquals("/asset/upload", response.getBody().getPath());
         assertEquals("INTERNAL_SERVER_ERROR", response.getBody().getErrorCode());
     }
-
 }

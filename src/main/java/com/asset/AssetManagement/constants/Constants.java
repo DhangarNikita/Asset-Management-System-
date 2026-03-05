@@ -34,7 +34,7 @@ public class Constants {
     public static final String LARGE_FILE_MESSAGE = "File size too large";
     public static final String FILE_SIZE_EXCEEDED = "FILE_SIZE_EXCEEDED";
     public static final String EXPIRED_ASSET_CRON = "0 0 0 * * ?";
-    public static final String EXPIRED_ASSET = "Expired assets moved successfully.";
+    public static final String EXPIRED_ASSET = "Scheduler run.";
     public static final String UNASSIGNED = "UNASSIGNED";
     public static final String ASSET_NOT_FOUND = "Asset ID not found";
     public static final String EMPLOYEE_NOT_FOUND = "Employee ID not found";
@@ -42,6 +42,4 @@ public class Constants {
     public static final String EXPIRE_BEFORE_PURCHASE = "Expiry date cannot be before purchase date";
     public static final String PURCHASE_IN_FUTURE = "Purchase date cannot be in future";
     public static final String MANUFACTURE_IN_FUTURE = "Manufacture date cannot be in future";
-
-
 }

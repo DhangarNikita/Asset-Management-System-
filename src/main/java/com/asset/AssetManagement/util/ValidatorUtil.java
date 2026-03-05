@@ -1,7 +1,6 @@
 package com.asset.AssetManagement.util;
 
 import com.asset.AssetManagement.constants.Constants;
-import com.asset.AssetManagement.entity.Asset;
 import com.asset.AssetManagement.exception.DuplicateAssetException;
 import com.asset.AssetManagement.exception.InvalidAssetDateException;
 import com.asset.AssetManagement.exception.ResourceNotFoundException;
@@ -42,7 +41,7 @@ public class ValidatorUtil {
             boolean isDuplicate = assetRepository.existsBySerialName(serialName);
 
             if (isDuplicate) {
-                Asset current = assetRepository.findById(currentAssetId).orElse(null);
+                var current = assetRepository.findById(currentAssetId).orElse(null);
 
                 if (current != null && !serialName.equals(current.getSerialName())) {
                     throw new DuplicateAssetException(Constants.SERIAL_NUMBER_EXIST + serialName);

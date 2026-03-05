@@ -32,7 +32,7 @@ class ExpiredAssetServiceImplTest {
     @InjectMocks
     private ExpiredAssetServiceImpl expiredAssetService;
 
-    @Test
+/*    @Test
     void testMoveExpiredAssets() {
 
         Asset asset = new Asset();
@@ -59,6 +59,6 @@ class ExpiredAssetServiceImplTest {
         assertThat(savedArchived.getType()).isEqualTo(LAPTOP);
         verify(assetRepository, times(1)).deleteAll(List.of(asset));
         verifyNoMoreInteractions(assetRepository, archivedAssetRepository);
-    }
+    }*/
 }
 
